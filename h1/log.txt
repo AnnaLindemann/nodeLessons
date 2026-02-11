@@ -1,0 +1,3 @@
+[2026-02-11T09:13:15.054Z] {INFO} User registered
+[2026-02-11T09:13:15.064Z] {INFO} User added name
+[2026-02-11T09:13:15.064Z] {INFO} User unregistered
