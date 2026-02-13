@@ -1,0 +1,2 @@
+[Fri Feb 13 2026 07:43:10 GMT+0100 (Central European Standard Time)] [INFO] First message
+[Fri Feb 13 2026 07:43:11 GMT+0100 (Central European Standard Time)] [INFO] Second message
