@@ -1,0 +1,5 @@
+Total characters: 1118 
+  Word Count: 169 
+  Sentence Count: 19 
+  Longest Word: info@example.com
+  longest Alphabetic Word:Путешественник
