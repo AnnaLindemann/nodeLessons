@@ -1,0 +1,17 @@
+{
+  "name": "lessonfive",
+  "version": "1.0.0",
+  "description": "This is my first project and this is about learning packages",
+  "keywords": [
+    "modules",
+    "packages",
+    "npm"
+  ],
+  "license": "ISC",
+  "author": "Anna",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
