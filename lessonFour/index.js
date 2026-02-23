@@ -1,12 +1,14 @@
-const axios = require("axios");
+require("dotenv").config()
+const http = require("http")
 
-async function getInfo(){
-try{
-  const response = await axios.get("https://jsonplaceholder.typicode.com/todos/1");
-  console.log(response.data);
-}catch(err){
-  console.error("Request failed", err.message);
-}
-}
+const port = process.env.PORT || 3333
 
-getInfo()
+const server = http.createServer((req,res) => {
+  res.statusCode = 200
+  res.setHeader("Content-Type", "text/p;lain")
+  res.end("hello world")
+})
+
+server.listen(port, ()=> {
+  console.log(`Sever is launched at http://localhost:${port}`)
+})
