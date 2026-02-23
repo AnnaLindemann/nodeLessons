@@ -38,3 +38,17 @@
 // Отправьте запрос и выведите температуру для указанного города в консоль.
 
 // 9.	Запустите скрипт командой `node weather.js`.
+require("dotenv").config()
+const axios = require("axios")
+const CITY = process.env.CITY;
+
+async function getTemperature(){
+  try{
+  const response = await axios.get(`https://wttr.in/${CITY}?format=%t`);
+  console.log(response.data)
+  } catch(err){
+    console.error("Response failed", err.message)
+  }
+}
+
+getTemperature()
