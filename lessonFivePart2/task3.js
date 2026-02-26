@@ -27,3 +27,24 @@
 
 // Настройте сервер на прослушивание порта из переменной окружения `PORT`.
 // Добавьте сообщение в консоль, которое будет выводиться при успешном запуске сервера.
+import http  from "http"
+import dotenv from "dotenv"
+
+dotenv.config()
+const port = process.env.PORT
+const message = process.env.MESSAGE
+
+const server = http.createServer((req,res) => {
+  try {res.statusCode = 200
+  res.setHeader("Content-Type", "text/plain; charset=utf-8")
+  res.end(message)
+} catch(err){
+  res.statusCode = 500
+  res.setHeader("Content-Type", "text/plain");
+    res.end("Internal Server Error");
+    console.error("Request failed:", err);
+}})
+
+server.listen(port, ()=> {
+  console.log(`Server is running at http://localhost:${port}`)
+})
