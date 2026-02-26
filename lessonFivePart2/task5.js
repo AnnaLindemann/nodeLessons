@@ -26,3 +26,33 @@
 
 // Настройте сервер на прослушивание порта `3000`.
 // Добавьте сообщение в консоль, которое будет выводиться при успешном запуске сервера.
+import http from "http"
+import dotenv from "dotenv"
+
+dotenv.config()
+const port = process.env.PORT
+
+const server = http.createServer((req,res) => { 
+  res.setHeader("Access-Control-Allow-Origin","*")
+  res.setHeader("Content-Type", "application/json")
+
+if(req.method === "POST" && req.url === "/submit"){
+  let body = ""
+    req.on("data", (chunk)=> {
+      body = body + chunk    
+    })
+    req.on("end", () => {
+       console.log(body)
+    res.statusCode = 200
+    res.end(JSON.stringify({ message: "POST request processed"}))
+  }) 
+  return
+} 
+     res.statusCode = 405;
+    res.end(JSON.stringify({ message: "Method not allowed"}));
+
+})
+
+server.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`)
+})
