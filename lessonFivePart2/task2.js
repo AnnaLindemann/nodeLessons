@@ -25,3 +25,21 @@
 
 // Настройте сервер на прослушивание порта `3000`.
 // Добавьте сообщение в консоль, которое будет выводиться при успешном запуске сервера.
+
+import http from "http";
+import moment from "moment";
+
+const port = 3333
+
+const server = http.createServer((req,res) => {
+
+const now = moment()
+res.statusCode = 200
+res.setHeader("Content-Type", "text/plain")
+res.setHeader("Cache-Control","public, max-age=3600")
+res.end(now.format("YYYY-MM-DD HH:mm:ss" )) 
+})
+
+server.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`)
+})

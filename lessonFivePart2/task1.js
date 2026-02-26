@@ -23,7 +23,7 @@
 // Добавьте сообщение в консоль, которое будет выводиться при успешном запуске сервера.
 import http from "http";
 import fs from "fs";
-const port = 3333;
+// const port = 3333;
 
 
 const server = http.createServer((req, res) => {
@@ -41,5 +41,5 @@ fs.appendFile("requests.log", data,"utf-8", (err) => {
 })
 
 server.listen(port, () => {
-  console.log(`Server running at http://172.18.133.209:${port}`)
+  console.log(`Server is running at http://172.18.133.209:${port}`)
 })
