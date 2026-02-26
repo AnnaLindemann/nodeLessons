@@ -1,5 +1,5 @@
 import http from "http"
-const PORT = 3333
+const PORT = 3334
 const server = http.createServer((req,res) => {
    res.statusCode = 200
   res.setHeader("Contant-Type","text/plain")
