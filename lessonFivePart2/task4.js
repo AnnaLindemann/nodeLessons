@@ -27,3 +27,30 @@
 
 // Настройте сервер на прослушивание порта `3000`.
 // Добавьте сообщение в консоль, которое будет выводиться при успешном запуске сервера.
+import http from "http"
+import dotenv from "dotenv"
+import EventEmitter from "events"
+const emmiter = new EventEmitter()
+
+dotenv.config()
+const port = process.env.PORT
+
+emmiter.on("requestReceived",(method, url) => {
+  console.log(`Request: ${method}, ${url}`)
+}) 
+
+const server = http.createServer((req,res) => {
+emmiter.emit("requestReceived", req.method, req.url)
+res.statusCode = 200
+res.setHeader("Content-Type", "text/plain,charset=utf-8")
+res.end("Request handled")
+})
+
+server.on("error", (err) => {
+  console.error("Error", err.message)
+})
+
+
+server.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`)
+})
