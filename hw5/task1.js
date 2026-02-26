@@ -1,6 +1,6 @@
 import http from "http"
 
-const port = 3334
+const port = 3333
 const server = http.createServer((req, res) => {
 const header = req.headers["authorization"]
 if(typeof header === "string"){
