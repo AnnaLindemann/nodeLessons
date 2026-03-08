@@ -1,7 +1,7 @@
-import Product from "./Product";
-import Category from "./Category";
+import Product from "./Product.js";
+import Category from "./Category.js";
 
-Category.hasMany(Product, {foreignKey: "categoryName", as: "products"})
-Product.belongsTo(Category, {foreignKey: "categoryName", as: "products"})
+Category.hasMany(Product, {foreignKey: "categoryName", sourceKey: "name", as: "products"})
+Product.belongsTo(Category, {foreignKey: "categoryName",targetKey: "name", as: "category"})
 
 export {Product, Category}
