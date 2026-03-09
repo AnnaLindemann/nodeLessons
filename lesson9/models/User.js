@@ -18,7 +18,7 @@ type: DataTypes.STRING,
 allowNull: false,
 },
 }, {
-tableName: "users",
+tableName: "Users",
 timestamps: true,
 });
 
