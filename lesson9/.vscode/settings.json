@@ -1,0 +1,32 @@
+{
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3307,
+      "driver": "MySQL",
+      "name": "MyBasa",
+      "username": "root",
+      "database": "mysql"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3310,
+      "driver": "MySQL",
+      "name": "9lesson",
+      "database": "mysql",
+      "username": "root"
+    }
+  ]
+}
