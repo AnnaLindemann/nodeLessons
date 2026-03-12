@@ -4,6 +4,9 @@ import express from "express"
 import sequelize from "./config/db.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import { authJWT, authorizeRole } from "./middelwares/auth.js"
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidXNlckBnbWFpbC5jb20iLCJpYXQiOjE3NzMzNDA1NTgsImV4cCI6MTc3MzM0NDE1OH0.uuWp2qUUphYwD8yjHNhB0pACLuKW-gJ0alm8oVq336Q
 
 const PORT = process.env.PORT || 3333
 const jwtSecret = process.env.JWT_SECRET_KEY
@@ -13,15 +16,18 @@ app.use(express.json())
 const users = [
   {id: 1,
     email: "user@gmail.com",
-    password: await bcrypt.hash("password111",10)
+    password: await bcrypt.hash("password111",10),
+    role: "admin",
   },
    {id: 2,
     email: "user2@gmail.com",
-    password: await bcrypt.hash("password111",10)
+    password: await bcrypt.hash("password111",10),
+    role: "mahager",
   },
    {id: 3,
     email: "user3@gmail.com",
-    password: await bcrypt.hash("password111",10)
+    password: await bcrypt.hash("password111",10),
+    role: "manager",
   }
 ]
 
@@ -29,6 +35,21 @@ app.get("/", (_req,res) => {
   res.send("It is working")
   console.log(users)
 })
+
+app.get("/profile", authJWT,(req,res)=> {
+res.json({
+  status: "success",
+  data: req.user,
+})
+})
+
+
+
+app.get("/admin",authJWT,authorizeRole("admin"), (req, res) => {
+res.send("admin page")
+})
+
+
 
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -50,6 +71,7 @@ app.post("/login", async (req, res) => {
       {
         userId: user.id,
         email: user.email,
+        role: user.role,
       },
       jwtSecret,
       {
