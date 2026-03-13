@@ -5,8 +5,7 @@ import sequelize from "./config/db.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { authJWT, authorizeRole } from "./middelwares/auth.js"
-
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidXNlckBnbWFpbC5jb20iLCJpYXQiOjE3NzMzNDA1NTgsImV4cCI6MTc3MzM0NDE1OH0.uuWp2qUUphYwD8yjHNhB0pACLuKW-gJ0alm8oVq336Q
+import { authJWT2 } from "./middelwares/authMy.js"
 
 const PORT = process.env.PORT || 3333
 const jwtSecret = process.env.JWT_SECRET_KEY
@@ -83,6 +82,32 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+////////// TASK 1 //////////////////////
+app.put("/update-profile",authJWT2,  async (req,res) => {
+try { 
+  const user = req.user.email
+
+  if(!user){
+    return res.status(404).json({message:"User not found"})
+  } 
+
+  const { newEmail } = req.body
+  if( newEmail){
+  res.status(400).json({message: "New email is required"})
+}
+
+  
+
+
+
+
+
+
+
+} catch(error){}
+
+
+})
 
 app.listen(PORT,async () => {
   try {
