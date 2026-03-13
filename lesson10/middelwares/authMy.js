@@ -1,14 +1,15 @@
-import jwt, { TokenExpiredError } from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 
 
 function authJWT2(req, res, next) {
-  const authHeader = req.header.authorization
+  const authHeader = req.headers.authorization
   if (authHeader && authHeader.startsWith("Bearer ")){
-    jwt.verify(TokenExpiredError, process.env.JWT_SECRET_KEY, (err, user) => {
+       const token = authHeader.split(" ")[1];
+    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
       if(err){
-        res.status(403).json({message: "Forbidden: Invalid or expired token"})
+        return res.status(403).json({message: "Forbidden: Invalid or expired token"})
       }
-      res.user = user
+      req.user = user
       next()
     })
     } else{

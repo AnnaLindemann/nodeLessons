@@ -85,28 +85,32 @@ app.post("/login", async (req, res) => {
 ////////// TASK 1 //////////////////////
 app.put("/update-profile",authJWT2,  async (req,res) => {
 try { 
-  const user = req.user.email
+  const { newEmail } = req.body 
+  
+  if( !newEmail){
+  return res.status(400).json({message: "New email is required"})
+} 
+const user = users.find((u) => req.user.userId === u.id)
 
   if(!user){
     return res.status(404).json({message:"User not found"})
-  } 
-
-  const { newEmail } = req.body
-  if( newEmail){
-  res.status(400).json({message: "New email is required"})
 }
+const existingEmail = users.find((u) => u.email === newEmail)
 
-  
+if(existingEmail && existingEmail.id !== user.userId ){
+  return res.status(400).json({message: "Email already exists"})
+}
+ 
+   user.email = newEmail 
+   
+  return res.status(200).json({message: "Email was successfully changed", email: user.email})
 
 
+} catch(error){
 
-
-
-
-
-} catch(error){}
-
-
+ console.error("Change email error:", error)
+    return res.status(500).send("Server error")
+    }
 })
 
 app.listen(PORT,async () => {
