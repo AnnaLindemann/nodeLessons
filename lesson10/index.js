@@ -133,6 +133,41 @@ app.get("/users",authJWT2, authorizeRole1("admin"), (req,res) => {
   res.status(200).json({message: "Users with admin role:", admins: admins})
 })
 
+///////////// Task 3 ///////////////////
+
+app.patch("/change-password",authJWT2, async (req, res) => {
+
+try {const {newPassword, password} = req.body
+
+if (!newPassword || !password) {
+      return res.status(400).send("Password and new password are required")
+    }
+const user = users.find((u) => u.id === req.user.userId)
+
+if(!user){
+  return res.status(404).json({message: "User not found"})
+}
+
+const comparedPassword = await bcrypt.compare(password, user.password)
+
+if(!comparedPassword){
+  return res.status(400).json({message:"Invaild password or login"})
+}
+
+const newPasswordHash  = await bcrypt.hash(newPassword,10)
+ user.password = newPasswordHash
+
+ return res.status(200).json({message: "Password was successfully changed"})}
+  catch(err){
+     console.error("Change password error:", error)
+    return res.status(500).send("Server error")
+  }
+})
+
+
+
+
+
 app.listen(PORT,async () => {
   try {
     await sequelize.authenticate()
