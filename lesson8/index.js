@@ -6,7 +6,7 @@ import sequelize from "./config/db.js"
 const PORT = process.env.PORT
 const app = express()
 app.get("/", (_req,res)=> {
-  res.send("It is working")
+  res.send("It is working 2")
 })
 
 app.listen(PORT,async () => {
