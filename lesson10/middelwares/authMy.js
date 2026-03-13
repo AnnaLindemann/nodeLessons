@@ -18,4 +18,15 @@ function authJWT2(req, res, next) {
   }
 
 
-  export {authJWT2}
+function authorizeRole1(role){
+  return (req,res,next) => {
+    if(req.user.role === role){
+      next()
+    } else{
+      return res.status(403).json({message: "Forbidden: You don't have permission"})
+    }
+  }
+}
+
+
+  export {authJWT2, authorizeRole1}

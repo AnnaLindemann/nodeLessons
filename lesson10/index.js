@@ -5,7 +5,7 @@ import sequelize from "./config/db.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { authJWT, authorizeRole } from "./middelwares/auth.js"
-import { authJWT2 } from "./middelwares/authMy.js"
+import { authJWT2, authorizeRole1 } from "./middelwares/authMy.js"
 
 const PORT = process.env.PORT || 3333
 const jwtSecret = process.env.JWT_SECRET_KEY
@@ -20,15 +20,24 @@ const users = [
   },
    {id: 2,
     email: "user2@gmail.com",
-    password: await bcrypt.hash("password111",10),
+    password: await bcrypt.hash("password121",10),
     role: "mahager",
   },
    {id: 3,
     email: "user3@gmail.com",
-    password: await bcrypt.hash("password111",10),
+    password: await bcrypt.hash("password131",10),
+    role: "manager",
+  },
+   {id: 4,
+    email: "user4@gmail.com",
+    password: await bcrypt.hash("password141",10),
+    role: "admin",
+  }, {id: 5,
+    email: "user5@gmail.com",
+    password: await bcrypt.hash("password151",10),
     role: "manager",
   }
-]
+  ]
 
 app.get("/", (_req,res) => {
   res.send("It is working")
@@ -114,6 +123,15 @@ if(existingEmail && existingEmail.id !== user.userId ){
 })
 
 //////// Task 2 ////////////
+
+app.get("/users",authJWT2, authorizeRole1("admin"), (req,res) => {
+  const adminBase = users.filter((u) => u.role === "admin")
+  const admins = adminBase.map((u) => {
+    return {id:u.id, email: u.email}
+  } )
+
+  res.status(200).json({message: "Users with admin role:", admins: admins})
+})
 
 app.listen(PORT,async () => {
   try {
