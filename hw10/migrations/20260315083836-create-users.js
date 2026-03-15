@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 export async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable("Users", {
+await queryInterface.createTable("Users", {
     id: {
 type: Sequelize.INTEGER,
 autoIncrement: true,
@@ -26,11 +26,6 @@ role: {
   type: Sequelize.ENUM('user', 'admin'),
   allowNull:false,
   defaultValue: 'user',
-},
-mustChangePassword: {
-  type: Sequelize.BOOLEAN,
-  allowNull: false,
-  defaultValue: false,
 },
  createdAt: {
         allowNull: false,

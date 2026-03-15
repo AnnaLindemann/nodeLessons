@@ -16,6 +16,11 @@ email: {
   type: DataTypes.STRING,
   allowNull: false,
   unique: true,
+  validate:{
+    isEmail: {
+      msg: "Invalid email format",
+    }
+  }
 },
 passwordHash: {
 type: DataTypes.STRING,
@@ -26,11 +31,6 @@ role: {
   allowNull:false,
   defaultValue: 'user',
 },
-mustChangePassword: {
-  type: DataTypes.BOOLEAN,
-  allowNull: false,
-  defaultValue: false,
-}
 }, {
 tableName: "Users",
 timestamps: true,
