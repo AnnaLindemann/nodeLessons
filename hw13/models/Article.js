@@ -9,8 +9,7 @@ const articleSchema = new mongoose.Schema({
   },
   content: {
     type: String,      
-    maxlength: 200,
-      },
+         },
   tags:[
      {
        type: mongoose.Schema.Types.ObjectId,
