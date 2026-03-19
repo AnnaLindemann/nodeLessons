@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql:8.0
-    container_name: hw10-mysql
+    container_name: l10-mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}     
     ports:
