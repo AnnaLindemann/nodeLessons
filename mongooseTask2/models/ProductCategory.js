@@ -32,6 +32,12 @@ const productCategorySchema = new mongoose.Schema({
   },
 });
 
+productCategorySchema.post("findOneAndDelete", async function (doc) {
+  if (doc) {
+    await mongoose.model("Product").deleteMany({ category: doc._id });
+  }
+});
+
 const ProductCategory = mongoose.model("ProductCategory", productCategorySchema);
 
 export default ProductCategory;
