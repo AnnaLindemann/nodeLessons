@@ -66,7 +66,11 @@ jwtSecret,
 {
   expiresIn: "3h",
 })
-res.json(token);
+res.json({message: "User successfully logged in",token, user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+      }});
 } catch(error){
   res.status(500).json({message: "Internal error"})
 }
