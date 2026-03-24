@@ -60,7 +60,25 @@ if(!product){
 })
 
 
-productRouter.delete("/")
+productRouter.delete("/:id", async (req, res) => {
+ try{ 
+    const id = req.params.id
+
+  if(!isValidObjectId(id)){
+    return res.status(400).json({message: "Id not valid"})
+  }
+
+  const deletedProduct = await Product.findOneAndDelete({_id: id} )
+  if(deletedProduct === null){
+     return res.status(404).json({ error: "Product not found" });
+  }
+  
+  res.status(200).json({ message: "Product deleted" });
+
+ } catch(err){
+   res.status(400).json({ error: "Failed to delete product" });
+ }
+})
 
 
 export default productRouter;
