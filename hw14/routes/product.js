@@ -17,7 +17,7 @@ if(!isValidObjectId(category)){
 }
 
 
-const existetCategory = await Category.findOne({_is: category});
+const existetCategory = await Category.findOne({_id: category});
 if(!existetCategory){
   return res.status(404).json({message: "Category not found"});
 }
@@ -33,6 +33,16 @@ return res.status(201).json({
   data: newProduct,
 })
 
+  }catch(error){
+    res.status(500).json({message: "Internal error"})
+  }
+})
+
+productRouter.get("/", async (req, res) => {
+  try{
+const products = await Product.find().populate(["category"]).exec();
+
+res.status(200).json({products})
   }catch(error){
     res.status(500).json({message: "Internal error"})
   }

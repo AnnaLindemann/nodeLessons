@@ -5,7 +5,8 @@ const categoryRoute = Router();
 
 
 categoryRoute.post("/", async (req, res) => {
-try {  const {name} = req.body;
+try {  
+  const {name} = req.body;
 if(!name){
   return res.status(400).json({message: "Category's name required"})
 }
