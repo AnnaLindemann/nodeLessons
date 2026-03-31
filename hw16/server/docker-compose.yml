@@ -1,0 +1,16 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: lesson15
+    restart: unless-stopped
+    ports:
+      - "27029:27017"
+    volumes:
+      - lesson14_mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root123
+      MONGO_INITDB_DATABASE: lesson15
+
+volumes:
+  lesson14_mongo_data:
